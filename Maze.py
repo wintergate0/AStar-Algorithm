@@ -1,5 +1,5 @@
 from PIL import Image
-import numpy as np
+
 
 class Maze:
     def __init__(self):
@@ -7,11 +7,18 @@ class Maze:
         self.width, self.height = self.maze.size
     
     def create_pixel_map(self):
-        array = np.array(self.maze, dtype=np.uint8)
-        self.pixel_map = Image.fromarray(array)
-        return array
+        self.pixel_map = []
+        lst = []
+        for n, pixel in enumerate(self.maze.getdata()):
+            if n % self.width == 0:
+               self.pixel_map.append(lst)
+               lst = []
+            if pixel[0] > 125:
+                lst.append(0)
+            else:
+                lst.append(1)
+        return self.pixel_map
 
 
-maze = Maze()
-print(maze.create_pixel_map())
-#print(maze.map)
+#m = Maze()
+#print(m.create_pixel_map())
