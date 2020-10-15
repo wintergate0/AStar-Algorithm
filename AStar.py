@@ -1,4 +1,4 @@
-import Maze
+from Maze import Maze as M
 
 class Node:
     def __init__(self, parent = None, position = None):
@@ -15,7 +15,7 @@ class Node:
 
 def astar(maze, start, end):
     start_point = Node(None, start) #[x,y]
-    start_point.g = start_point.h = strart_point.f = 0
+    start_point.g = start_point.h = start_point.f = 0
     end_point = Node(None, end) #[x,y]
     end_point.g = end_point.h = end_point.f = 0
     open = []
@@ -36,7 +36,7 @@ def astar(maze, start, end):
         if current_point == end_point:
             path = []
             current = current_point
-            while current in not None:
+            while not current is None:
                 path.append(current.position)
                 current = current.parent
             return path[::-1]
@@ -66,4 +66,21 @@ def astar(maze, start, end):
             open.append(child)
 
 def main():
-    
+    maze =  [[0, 0, 0, 0, 1, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 1, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 1, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 1, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 1, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 1, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 1, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 1, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]]
+
+    start = (0, 0)
+    end = (7, 6)
+
+    path = astar(maze, start, end)
+    print(path)
+
+main()
